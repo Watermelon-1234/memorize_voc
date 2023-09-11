@@ -1,0 +1,103 @@
+/* 基本樣式 */
+body {
+    background-color: #000; /* 黑色背景 */
+    color: #00FF00; /* 深綠色文字 */
+    font-family: Arial, sans-serif; /* 使用Arial字體，sans-serif作為備用字體 */
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* 響應式設計 */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 14px; /* 使用相對大小，而不是固定像素大小 */
+    }
+    h1 {
+        font-size: 24px; /* 調整標題字體大小 */
+    }
+    select, input[type="number"], input[type="button"] {
+        padding: 8px; /* 調整輸入元素的內邊距，使其更大 */
+    }
+}
+
+/* 其他樣式 */
+h1 {
+    color: #00FF00; /* 標題文字為深綠色 */
+    text-align: center; /* 文字置中 */
+}
+/* 新增橫幅的樣式 */
+.banner {
+    background-color: #333; /* 橫幅背景色 */
+    color: #fff; /* 橫幅文字顏色 */
+    padding: 10px; /* 橫幅內邊距 */
+    text-align: center; /* 文字居中 */
+}
+
+/* 新增頁尾的樣式 */
+.footer {
+    background-color: #333; /* 頁尾背景色 */
+    color: #fff; /* 頁尾文字顏色 */
+    padding: 10px; /* 頁尾內邊距 */
+    text-align: center; /* 文字居中 */
+}
+form {
+    margin: 20px; /* 距離外容器的邊距 */
+}
+
+label {
+    color: #00FF00; /* 標籤文字為深綠色 */
+}
+
+select, input[type="number"], input[type="button"] {
+    background-color: #000; /* 背景色為黑色 */
+    color: #00FF00; /* 文字顏色為深綠色 */
+    border: 2px solid #00FF00; /* 邊框為深綠色實線 */
+    border-radius: 5px; /* 圓角邊框 */
+    padding: 5px; /* 內邊距 */
+    margin: 5px; /* 外邊距 */
+}
+
+select:focus, input[type="number"]:focus {
+    border-color: #00FFFF; /* 聚焦時邊框顏色為淺綠色 */
+}
+
+#outputDiv {
+    background-color: #000; /* 輸出區域背景為黑色 */
+    color: #00FF00; /* 輸出文字顏色為深綠色 */
+    margin: 20px; /* 外邊距 */
+    padding: 10px; /* 內邊距 */
+    width: 60%;
+}
+
+ul {
+    list-style-type: none; /* 隱藏列表樣式 */
+    padding: 0;
+}
+
+li {
+    margin: 5px 0; /* 調整列表項目的外邊距 */
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    
+}
+
+.form-output {
+    display: row;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.empty-div {
+    background-color: #a6a6a6; /* 輸出區域背景為黑色 */
+    width:20% ;
+    height: 100%;
+}
+
