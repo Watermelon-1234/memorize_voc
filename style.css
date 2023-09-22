@@ -11,15 +11,20 @@ body {
 }
 
 /* 響應式設計 */
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
     body {
-        font-size: 14px; /* 使用相對大小，而不是固定像素大小 */
+        font-size: 50px; /* 使用相對大小，而不是固定像素大小 */
     }
     h1 {
-        font-size: 24px; /* 調整標題字體大小 */
+        font-size: 50px; /* 調整標題字體大小 */
     }
     select, input[type="number"], input[type="button"] {
-        padding: 8px; /* 調整輸入元素的內邊距，使其更大 */
+        padding: 15px;
+        height: 50px;
+        font-size: 35px; /* 设置字体大小 */
+        margin: 10px; /* 设置外边距 */
+        font-weight: bold; /* 设置文本粗细 */
+        text-align: center;
     }
 }
 
@@ -58,7 +63,12 @@ select, input[type="number"], input[type="button"] {
     border-radius: 5px; /* 圓角邊框 */
     padding: 5px; /* 內邊距 */
     margin: 5px; /* 外邊距 */
+    text-align: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    width:fit-content;
 }
+
 
 select:focus, input[type="number"]:focus {
     border-color: #00FFFF; /* 聚焦時邊框顏色為淺綠色 */

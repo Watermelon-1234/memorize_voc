@@ -19,8 +19,8 @@ function pickWords() {
     var endLetter = document.getElementById("endLetter").value.trim().toUpperCase();
     var numToPick = parseInt(document.getElementById("numToPick").value);
     var outputDiv = document.getElementById("outputDiv");
-
-    if (startLetter !== '' && endLetter !== '' && numToPick !== '') {
+    //console.log(numToPick);
+    if (startLetter !== '' && endLetter !== '' && numToPick ) {
         outputDiv.innerHTML = "<h2>請等等...</h2><ul>";
 
         pickAndOutputWords(startLetter, endLetter, numToPick)
@@ -60,8 +60,9 @@ function pickAndOutputWords(startLetter, endLetter, numToPick) {
     return fetch(api_url + '?action=pickAndOutputWords&startLetter=' + startLetter + '&endLetter=' + endLetter + '&numToPick=' + numToPick)
         .then(response => response.json())
         .then(data => {
-        var resultArray = data.result;
-        return resultArray;
+            var resultArray = data.result;
+            //console.log(resultArray);
+            return resultArray;
         })
         .catch(error => {
         console.error('Error:', error);
@@ -73,6 +74,7 @@ function pickall(startLetter, endLetter) {
         .then(response => response.json())
         .then(data => {
         var resultArray = data.result;
+        //console.log(resultArray);
         return resultArray;
         })
         .catch(error => {
@@ -82,14 +84,26 @@ function pickall(startLetter, endLetter) {
 
 function displayWords(words) {
     var outputDiv = document.getElementById("outputDiv");
-    outputDiv.innerHTML = "<h2>抽到的單字：</h2><ul>";
-    words.forEach(function (word) {
-        outputDiv.innerHTML += "<li>" + word + "</li>";
-    });
-    outputDiv.innerHTML += "</ul>";
+    //console.log(words);
+    var content = "<h2>抽到的單字：</h2><table>";
+    for (var i = 0; i < words.length; i++) {
+        content += "<tr><td>" + words[i][0] + "</td><td><input type=\"button\" onclick=\"showChinese(this,\'"+ words[i][1] + "\' ) \" value=\"顯示中文\"></td></tr>";
+    }
+    content += "</table>";
+    outputDiv.innerHTML = content;
 }
 
-
+function showChinese(button,ch) {
+    if(button.value=="顯示中文")
+    {
+        button.value =ch;
+    }    
+    else
+    {
+        button.value ="顯示中文"
+    }
+  }
+  
 document.addEventListener("DOMContentLoaded", function () {
     // 在这里放置你的 JavaScript 代码
     // 例如，添加事件监听器等
