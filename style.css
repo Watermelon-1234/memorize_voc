@@ -32,6 +32,7 @@ body {
 h1 {
     color: #00FF00; /* 標題文字為深綠色 */
     text-align: center; /* 文字置中 */
+    font-weight: bold;
 }
 /* 新增橫幅的樣式 */
 .banner {
@@ -47,6 +48,7 @@ h1 {
     color: #fff; /* 頁尾文字顏色 */
     padding: 10px; /* 頁尾內邊距 */
     text-align: center; /* 文字居中 */
+    font-size: 10;
 }
 form {
     margin: 20px; /* 距離外容器的邊距 */
@@ -54,6 +56,7 @@ form {
 
 label {
     color: #00FF00; /* 標籤文字為深綠色 */
+    font-weight: bold;
 }
 
 select, input[type="number"], input[type="button"] {
