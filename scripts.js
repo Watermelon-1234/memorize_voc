@@ -100,7 +100,7 @@ function showChinese(button,ch) {
     }    
     else
     {
-        button.value ="顯示中文"
+        button.value ="顯示中文";
     }
   }
   
