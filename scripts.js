@@ -87,12 +87,22 @@ function displayWords(words) {
     //console.log(words);
     var content = "<h2>抽到的單字：</h2><table>";
     for (var i = 0; i < words.length; i++) {
-        content += "<tr><td>" + words[i][0] + "</td><td><input type=\"button\" onclick=\"showChinese(this,\'"+ words[i][1] + "\' ) \" value=\"顯示中文\"></td></tr>";
+        content += "<tr><td><input type=\"button\" onclick=\"high_light(this) \" value=\"我不會\"></td><td>" + words[i][0] + "</td><td><input type=\"button\" onclick=\"showChinese(this,\'"+ words[i][1] + "\' ) \" value=\"顯示中文\"></td></tr>";
     }
     content += "</table>";
     outputDiv.innerHTML = content;
 }
+function high_light(button) {
+  var row = button.parentNode.parentNode; 
+  var cells = row.getElementsByTagName('td');
+  
+  for(var i = 0; i < cells.length; i++) {
+    cells[i].style.color =  '#FF00FF'; 
+  }
+}
 
+// Usage:
+// <button onclick="high_light(this)">Highlight Row</button>
 function showChinese(button,ch) {
     if(button.value=="顯示中文")
     {
