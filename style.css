@@ -110,7 +110,10 @@ li {
 
 .empty-div {
     background-color: #a6a6a6; /* 輸出區域背景為黑色 */
-    width:15% ;
+    width:13% ;
     height: 100%;
 }
 
+.td{
+    align: left;    
+}

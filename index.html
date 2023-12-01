@@ -3,8 +3,13 @@
   <head>
     <base target="_top">
     <link href="style.css" rel="stylesheet">
-    <script src="scripts.js"></script>
+    <script src="js/scripts.js"></script>
+    <!-- <script type="module" src="file:///D:/GitHub/memorize_voc/js/database.js" crossorigin="anonymous"></script> -->
+    <script type="module" src="js/database.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
   </head>
   <body>
@@ -16,8 +21,7 @@
       <form>
         <label for="startLetter">單字檢測：從</label>
         <select id="startLetter" name="startLetter" required>
-          <option value="" disabled selected></option>
-          <option value="A">A</option>
+          <option value="A" selected>A</option>
           <option value="B">B</option>
           <option value="C">C</option>
           <option value="D">D</option>

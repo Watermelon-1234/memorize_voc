@@ -1,16 +1,24 @@
 function populateEndLetters() {//作為下拉式選單的內容
     var startLetter = document.getElementById("startLetter").value;
     var endLetterSelect = document.getElementById("endLetter");
-    endLetterSelect.innerHTML = "<option value='' disabled selected></option>";
 
     var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     var startIndex = alphabet.indexOf(startLetter);
+    var endIndex = alphabet.indexOf(endLetterSelect.value);
+    endLetterSelect.innerHTML = "<option value='' disabled selected></option>";  
     for (var i = startIndex; i < alphabet.length; i++) {
         var letter = alphabet.charAt(i);
         var option = document.createElement("option");
         option.value = letter;
         option.innerText = letter;
         endLetterSelect.appendChild(option);
+    }
+    if(endIndex < startIndex) {
+        endLetterSelect.selectedIndex = 1;
+    }
+    else
+    {
+        endLetterSelect.selectedIndex = endIndex - startIndex +1;
     }
 }
 
@@ -87,7 +95,10 @@ function displayWords(words) {
     //console.log(words);
     var content = "<h2>抽到的單字：</h2><table>";
     for (var i = 0; i < words.length; i++) {
-        content += "<tr><td>" + words[i][0] + "</td><td><input type=\"button\" onclick=\"high_light(this) \" value=\"我不會\"></td><td><input type=\"button\" onclick=\"showChinese(this,\'"+ words[i][1] + "\' ) \" value=\"顯示中文\"></td></tr>";
+        content += "<tr><td>"+(i+1)+"</td>";
+        content += "<td>" + words[i][0] + "</td>";
+        content += "<td><input type=\"button\" onclick=\"high_light(this) \" value=\"我不會\"></td>"
+        content += "<td><input type=\"button\" onclick=\"showChinese(this,\'"+ words[i][1] + "\' ) \" value=\"顯示中文\"></td></tr>";
     }
     content += "</table>";
     content += "<input type=\"button\" onclick=\"toggleRowVisibility(this)\" value=\"只出現不會的字\"></input>";
@@ -181,7 +192,7 @@ function toggleRowVisibility(button) {
         // 获取行的样式
         rowStyle = window.getComputedStyle(ele[1]).color;
         
-        console.log(rowStyle);
+        //console.log(rowStyle);
         
         
         if(rowStyle == 'rgb(255, 0, 255)')//已變色
