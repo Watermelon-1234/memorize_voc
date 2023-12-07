@@ -22,16 +22,18 @@ function populateEndLetters() {//作為下拉式選單的內容
     }
 }
 
-function pickWords() {
+function pickWords() {//用抽的
     var startLetter = document.getElementById("startLetter").value.trim().toUpperCase();
     var endLetter = document.getElementById("endLetter").value.trim().toUpperCase();
     var numToPick = parseInt(document.getElementById("numToPick").value);
     var outputDiv = document.getElementById("outputDiv");
+    var sheet = document.getElementById("sheetName").value;
+    //console.log(choice);
     //console.log(numToPick);
     if (startLetter !== '' && endLetter !== '' && numToPick >0) {
         outputDiv.innerHTML = "<h2>請等等...</h2><ul>";
 
-        pickAndOutputWords(startLetter, endLetter, numToPick)
+        pickAndOutputWords(startLetter, endLetter, numToPick,sheet)
         .then(words => {
             displayWords(words);
         })
@@ -47,10 +49,10 @@ function pickAllWords() {
     var startLetter = document.getElementById("startLetter").value.trim().toUpperCase();
     var endLetter = document.getElementById("endLetter").value.trim().toUpperCase();
     var outputDiv = document.getElementById("outputDiv");
-
+    var sheet = document.getElementById("sheetName").value.trim();
     if (startLetter !== '' && endLetter !== '') {
         outputDiv.innerHTML = "<h2>請等等...</h2><ul>";
-        pickall(startLetter, endLetter)
+        pickall(startLetter, endLetter,sheet)
         .then(words => {
             displayWords(words);
         })
@@ -62,32 +64,43 @@ function pickAllWords() {
     }
 }
 
-var api_url = 'https://script.google.com/macros/s/AKfycbxN6TKYrCfvVvxDVhM3V61TH62vj0BAUW9l05XYzWCyjYNeYDIea2MBLQhetqpePAK9/exec';
+var api_url = 'https://script.google.com/macros/s/AKfycbxN6TKYrCfvVvxDVhM3V61TH62vj0BAUW9l05XYzWCyjYNeYDIea2MBLQhetqpePAK9/exechttps://script.google.com/macros/s/AKfycbxN6TKYrCfvVvxDVhM3V61TH62vj0BAUW9l05XYzWCyjYNeYDIea2MBLQhetqpePAK9/exec';
 
-function pickAndOutputWords(startLetter, endLetter, numToPick) {
-    return fetch(api_url + '?action=pickAndOutputWords&startLetter=' + startLetter + '&endLetter=' + endLetter + '&numToPick=' + numToPick)
-        .then(response => response.json())
-        .then(data => {
-            var resultArray = data.result;
-            //console.log(resultArray);
-            return resultArray;
-        })
-        .catch(error => {
-        console.error('Error:', error);
-        });
+function pickAndOutputWords(startLetter, endLetter, numToPick, sheet) {
+  return fetch(api_url + '?action=pickAndOutputWords&startLetter=' + startLetter + '&endLetter=' + endLetter + '&numToPick=' + numToPick + '&sheet=' + sheet, {
+    method: "GET",
+    mode: "cors", // 啟用跨域支持
+  })
+    .then(response => response.json())
+    .then(data => {
+      var resultArray = data.result;
+      // console.log(resultArray);
+      return resultArray;
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
 }
 
-function pickall(startLetter, endLetter) {
-    return fetch(api_url + '?action=pickall&startLetter=' + startLetter + '&endLetter=' + endLetter)
-        .then(response => response.json())
-        .then(data => {
-        var resultArray = data.result;
-        //console.log(resultArray);
-        return resultArray;
-        })
-        .catch(error => {
-        console.error('Error:', error);
-        });
+
+
+
+
+
+function pickall(startLetter, endLetter,sheet) {
+    return fetch(api_url + '?action=pickall&startLetter=' + startLetter + '&endLetter=' + endLetter+'&sheet='+shee, {
+      method: "GET",
+      mode: "cors", // 啟用跨域支持
+    })
+    .then(response => response.json())
+    .then(data => {
+    var resultArray = data.result;
+    //console.log(resultArray);
+    return resultArray;
+    })
+    .catch(error => {
+    console.error('Error:', error);
+    });
 }
 
 function displayWords(words) {
@@ -95,9 +108,10 @@ function displayWords(words) {
     //console.log(words);
     var content = "<h2>抽到的單字：</h2><table>";
     for (var i = 0; i < words.length; i++) {
-        content += "<tr><td>"+(i+1)+"</td>";
+        content += "<tr><td class=\"ranking\">"+(i+1)+"</td>";
         content += "<td>" + words[i][0] + "</td>";
         content += "<td><input type=\"button\" onclick=\"high_light(this) \" value=\"我不會\"></td>"
+        content += "<td><input class=\"pronouncing\" type=\"button\" onclick=\"showChinese(this,\'"+ words[i][2] + "\' ) \" value=\"顯示音標\"></td></tr>";
         content += "<td><input type=\"button\" onclick=\"showChinese(this,\'"+ words[i][1] + "\' ) \" value=\"顯示中文\"></td></tr>";
     }
     content += "</table>";

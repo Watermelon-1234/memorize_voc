@@ -114,6 +114,17 @@ li {
     height: 100%;
 }
 
-.td{
-    align: left;    
+.ranking{
+    text-align:"right";
+    align:"right";
+
+}
+
+@font-face {
+    font-family:"PHONETIC" ;
+    src: url(fonts/PHONETIC.TTF)format(truetype);
+}
+
+.prouncing{
+    font-family:"PHONETIC";
 }
