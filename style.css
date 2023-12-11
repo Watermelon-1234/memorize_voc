@@ -114,17 +114,18 @@ li {
     height: 100%;
 }
 
-.ranking{
-    text-align:"right";
-    align:"right";
-
+.ranking {
+    width: 25px; /* 設定 ranking 的寬度 */
+    text-align: right; /* 將文字靠右對齊 */
 }
+
+
 
 @font-face {
-    font-family:"PHONETIC" ;
-    src: url(fonts/PHONETIC.TTF)format(truetype);
+    font-family:"PHONETIC";
+    src:
+        url('fonts/PHONETIC.TTF')format("truetype");
+    src:
+        url('fonts/PHONETIC.woff')format("woff");
 }
 
-.prouncing{
-    font-family:"PHONETIC";
-}

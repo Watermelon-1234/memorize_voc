@@ -15,6 +15,7 @@
   <body>
     <div class="banner">
       <h1>單字檢測系統</h1>
+      <span style="font-size: 25%; color: white;">注意!如果手機切換到其他分頁或者app可能會因為手機端的記憶體空間配置而自動刷新而讓單字消失!</span>
     </div>
     <div class="container">
       <div class="empty-div"></div>
@@ -60,7 +61,7 @@
         </select><br>
         
         <label for="numToPick">單字數：</label>
-        <input type="number" id="numToPick" name="numToPick" required><br>
+        <input type="number" id="numToPick" name="numToPick" required value="5"><br>
         
         <input type="button" value="確定" onclick="pickWords()">
         <input type="button" value="區段中全部[排序]" onclick="pickAllWords()">
