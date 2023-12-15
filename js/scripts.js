@@ -90,7 +90,7 @@ function pickAndOutputWords(startLetter, endLetter, numToPick, sheet) {
 
 
 function pickall(startLetter, endLetter,sheet) {
-    return fetch(api_url + '?action=pickall&startLetter=' + startLetter + '&endLetter=' + endLetter+'&sheet='+shee, {
+    return fetch(api_url + '?action=pickall&startLetter=' + startLetter + '&endLetter=' + endLetter+'&sheet='+sheet, {
       method: "GET",
       mode: "cors", // 啟用跨域支持 
     })
@@ -234,6 +234,7 @@ function toggleRowVisibility(button) {
         if(rowStyle == 'rgb(255, 0, 255)')//已變色
         {
           //rows[i].style.display = '';//不用理他
+          ele[3].click();
         } 
         else {
           rows[i].style.display = 'none'; 
