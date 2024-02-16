@@ -22,7 +22,7 @@ function populateEndLetters() {//作為下拉式選單的內容
     }
 }
 
-function pickWords() {//用抽的
+function pickWords(method='pickAndOutputWords') {//用抽的
     var startLetter = document.getElementById("startLetter").value.trim().toUpperCase();
     var endLetter = document.getElementById("endLetter").value.trim().toUpperCase();
     var numToPick = parseInt(document.getElementById("numToPick").value);
@@ -36,7 +36,7 @@ function pickWords() {//用抽的
     if (startLetter !== '' && endLetter !== '' && numToPick >0) {
         outputDiv.innerHTML = "<h2>請等等...</h2><ul>";
 
-        pickAndOutputWords(startLetter, endLetter, numToPick,sheet,shuffle)
+        pickAndOutputWords(startLetter, endLetter, numToPick,sheet,shuffle,method)
         .then(words => {
             displayWords(words);
         })
@@ -71,8 +71,8 @@ function pickAllWords() {
 
 var api_url = 'https://script.google.com/macros/s/AKfycbxN6TKYrCfvVvxDVhM3V61TH62vj0BAUW9l05XYzWCyjYNeYDIea2MBLQhetqpePAK9/exec';
 
-function pickAndOutputWords(startLetter, endLetter, numToPick, sheet,shuffle) {
-  return fetch(api_url + '?action=pickAndOutputWords&startLetter=' + startLetter + '&endLetter=' + endLetter + '&numToPick=' + numToPick + '&sheet=' + sheet+'&shuffle='+shuffle, {
+function pickAndOutputWords(startLetter, endLetter, numToPick, sheet,shuffle,method) {
+  return fetch(api_url + '?action='+method+'&startLetter=' + startLetter + '&endLetter=' + endLetter + '&numToPick=' + numToPick + '&sheet=' + sheet+'&shuffle='+shuffle, {
     method: "GET",
     mode: "cors", // 啟用跨域支持
   })
@@ -92,7 +92,7 @@ function pickAndOutputWords(startLetter, endLetter, numToPick, sheet,shuffle) {
 
 
 
-function pickall(startLetter, endLetter,sheet,shuffle) {
+function pickall(startLetter, endLetter,sheet) {
     return fetch(api_url + '?action=pickall&startLetter=' + startLetter + '&endLetter=' + endLetter+'&sheet='+sheet, {
       method: "GET",
       mode: "cors", // 啟用跨域支持 

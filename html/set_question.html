@@ -2,10 +2,10 @@
 <html>
   <head>
     <base target="_top">
-    <link href="style.css" rel="stylesheet">
-    <script src="js/scripts.js"></script>
+    <link href="../style.css" rel="stylesheet">
+    <script src="../js/scripts.js"></script>
     <!-- <script type="module" src="file:///D:/GitHub/memorize_voc/js/database.js" crossorigin="anonymous"></script> -->
-    <script type="module" src="js/database.js"></script>
+    <script type="module" src="../js/database.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
@@ -19,7 +19,8 @@
     </div>
     <div class="container">
       <div class="empty-div"></div>
-      <form>
+      <form id="settings">
+        <h2>基本設定</h2>
         <label for="startLetter">單字檢測：從</label>
         <select id="startLetter" name="startLetter" required>
           <option value="A" selected>A</option>
@@ -60,16 +61,33 @@
           <option value="1-6:chosen">1-6級挑選版</option>
           <option value="5552:chosen">5552</option>
         </select><br>
+
         <div>
-          <input type="checkbox" id="shuffle" name="shuffle" class="shuffle" style="height: 30px;width: 30px;" checked />
-          <label for="shuffle">勾選以打亂單字</label>
+          <label for="numToPick">總共要抽出幾個呢：</label>
+          <input type="number" id="numToPick" name="numToPick" required value="5"><br>
         </div>
-        <label for="numToPick">單字數：</label>
-        <input type="number" id="numToPick" name="numToPick" required value="5"><br>
-        
-        <input type="button" value="完全隨機取數" onclick="pickWords()">
-        <input type="button" value="平均分配取數" onclick="pickWords('pickAvg')">
-        <input type="button" value="區段中全部[排序]" onclick="pickAllWords()">
+        <input type="checkbox" id="dispense" name="dispense" class="dispense" style="height: 30px;width: 30px;" checked />
+        <label for="shuffle">勾選以打亂單字</label>
+        <div id="approach_to_set">
+          <label>模式選擇</label>
+          <div id="sorted_random">
+          </div>
+          
+            <div id="sorted_constant_num">
+              <label>在範圍內的每個單字都抽一樣多個(如果單字不夠不會重複抽)</label>
+            </div>  
+            <div id ="unsorted_random">
+              <label>完全隨機選取範圍內單字</label>
+            </div>
+          </div>
+          <div id="sorted_all">
+            <label>選擇範圍內全部的單字</label>
+        </div>
+        <label id="indroduction"></label>
+        <div id="action">
+          <input type="button" value="出題囉~" onclick="setQ()">
+          <!-- <input type="button" value="區段中全部[排序]" onclick="pickAllWords()"> -->
+        </div>
       </form>
       <div class="empty-div"> </div>
     </div>
@@ -77,18 +95,6 @@
       <div class="empty-div"> </div>
       <div id="outputDiv"></div>
       <div class="empty-div"> </div>
-    </div>
-    <div class="instructions">
-      <div class="empty-div"> </div>
-      <div class="instructions"></div>
-        <h2>網頁介紹</h2>
-        <br>
-        <h3>這是一個為了讓人更方便背單字而誕生的網頁，</h3><br><h3>提供了不同的版本與不同的單字抽選模式供使用者使用</h3>
-        <p>-----------------------</p>
-        <h2>網頁使用教學</h2>
-        <h3>我不想打= =</h3>
-      </div>
-      <div class="empty-div"></div>
     </div>
     <div class="footer">
       <p>&copy; 2023 單字檢測系統</p>

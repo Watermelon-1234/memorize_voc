@@ -18,6 +18,13 @@ body {
     h1 {
         font-size: 50px; /* 調整標題字體大小 */
     }
+    h2{
+        font-size: 40px;
+    }
+    h3{
+        font-size: 30px;
+    }
+
     select, input[type="number"], input[type="button"] {
         padding: 15px;
         height: 50px;
@@ -40,8 +47,26 @@ h1 {
     color: #fff; /* 橫幅文字顏色 */
     padding: 10px; /* 橫幅內邊距 */
     text-align: center; /* 文字居中 */
+    width: 100%;
+}
+h3{
+    color: #000000; /* 標題文字為深綠色 */
+    text-align: center; /* 文字置中 */
+    font-weight: bold;
 }
 
+/* instruction */
+.instructions {
+    background-color: #696969; /* 頁尾背景色 */
+    color: #000000; /* 頁尾文字顏色 */
+    padding: 10px; /* 頁尾內邊距 */
+    text-align: center; /* 文字居中 */
+    font-size: 14;
+    width: 100%;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
 /* 新增頁尾的樣式 */
 .footer {
     background-color: #333; /* 頁尾背景色 */
@@ -49,6 +74,7 @@ h1 {
     padding: 10px; /* 頁尾內邊距 */
     text-align: center; /* 文字居中 */
     font-size: 10;
+    width: 100%;
 }
 form {
     margin: 20px; /* 距離外容器的邊距 */
@@ -70,6 +96,11 @@ select, input[type="number"], input[type="button"] {
     padding-top: 0;
     padding-bottom: 0;
     width:fit-content;
+}
+
+h2 {
+    color:#ffffff;
+    text-align: center;
 }
 
 
@@ -112,6 +143,10 @@ li {
     background-color: #a6a6a6; /* 輸出區域背景為黑色 */
     width:13% ;
     height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
 }
 
 .ranking {
@@ -129,3 +164,7 @@ li {
         url('fonts/PHONETIC.woff')format("woff");
 }
 
+span{
+    font-size: 25%;
+    color:white;
+}
