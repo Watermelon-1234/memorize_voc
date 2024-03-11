@@ -398,4 +398,3 @@ function create_alphabat_content()
   copyToClipboard(resultString);
 
 }
-
