@@ -88,10 +88,6 @@ function pickAndOutputWords(startLetter, endLetter, numToPick, sheet,shuffle,met
 }
 
 
-
-
-
-
 function pickall(startLetter, endLetter,sheet) {
     return fetch(api_url + '?action=pickall&startLetter=' + startLetter + '&endLetter=' + endLetter+'&sheet='+sheet, {
       method: "GET",
@@ -108,26 +104,42 @@ function pickall(startLetter, endLetter,sheet) {
     });
 }
 
-function displayWords(words) {
-    var outputDiv = document.getElementById("outputDiv");
-    //console.log(words);
-    var content = "<h2>抽到的單字：</h2><p>點擊單字切換成音標 再點一次切換回單字</p><table>";
-    for (var i = 0; i < words.length; i++) {
-        content += "<tr><td class=\"ranking\"><p>"+(i+1)+".</p></td>";
-        content += "<td><p class=\"pronouncing-switch\" data-value=\""+words[i][2].replace(/'/g, '&apos;')+"\">" + words[i][0] + "</p></td>";
-        content += "<td><input type=\"button\" onclick=\"high_light(this) \" value=\"我不會\"></td>";
-        content += "<td><input type=\"button\" onclick=\"showChinese(this,\'"+ words[i][1] + "\' ) \" value=\"顯示中文\"></td></tr>";
+function displayWords(words = localStorage.getItem('words')) {
+    console.log(localStorage.getItem('words'));
+    // console.log("test");
+    console.log(typeof(words));
+    if(words)
+    {
+      if(typeof(words) === 'string')//有暫存
+      {
+        words=JSON.parse(words);
+      }
+      var outputDiv = document.getElementById("outputDiv");
+      console.log(outputDiv);
+      var content = "<h2>抽到的單字：</h2><p>點擊單字切換成音標 再點一次切換回單字</p><table>";
+      for (var i = 0; i < words.length; i++) {
+          content += "<tr><td class=\"ranking\"><p>"+(i+1)+".</p></td>";
+          content += "<td><p class=\"pronouncing-switch\" data-value=\""+words[i][2].replace(/'/g, '&apos;')+"\">" + words[i][0] + "</p></td>";
+          content += "<td><input type=\"button\" onclick=\"high_light(this) \" value=\"我不會\"></td>";
+          content += "<td><input type=\"button\" onclick=\"showChinese(this,\'"+ words[i][1] + "\' ) \" value=\"顯示中文\"></td></tr>";
+      }
+      content += "</table>";
+      content += "<input type=\"button\" id=\"copyBtn\" value=\"複製單字到剪貼簿\">";
+      content += "<input type=\"button\" onclick=\"toggleRowVisibility(this)\" value=\"只出現不會的字\"></input>";
+      outputDiv.innerHTML = content;
+      switch_col_one();
+      document.getElementById('copyBtn').addEventListener('click', function() {
+          // 在這裡使用 this
+          create_alphabat_content();
+          this.value = "已複製完成!";
+      });
+      localStorage.setItem('words',JSON.stringify(words))
+    
     }
-    content += "</table>";
-    content += "<input type=\"button\" id=\"copyBtn\" value=\"複製單字到剪貼簿\">";
-    content += "<input type=\"button\" onclick=\"toggleRowVisibility(this)\" value=\"只出現不會的字\"></input>";
-    outputDiv.innerHTML = content;
-    switch_col_one();
-    document.getElementById('copyBtn').addEventListener('click', function() {
-        // 在這裡使用 this
-        create_alphabat_content();
-        this.value = "已複製完成!";
-    });
+    else
+    {
+      console.log("no temp!");
+    }
 }
 function high_light(button) {
 
@@ -184,6 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("startLetter").addEventListener("change", populateEndLetters);
     document.getElementById("startLetter").dispatchEvent(new Event("change"));
 });
+// window.onload = displayWords();
 
 
 // 高亮颜色
