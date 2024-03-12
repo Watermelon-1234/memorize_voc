@@ -78,7 +78,7 @@ function pickAndOutputWords(startLetter, endLetter, numToPick, sheet,shuffle,met
   })
     .then(response => response.json())
     .then(data => {
-      var resultArray = data.result;
+      var resultArray = data.result.map(row=>row.concat(0));
       // console.log(resultArray);
       return resultArray;
     })
@@ -95,7 +95,7 @@ function pickall(startLetter, endLetter,sheet) {
     })
     .then(response => response.json())
     .then(data => {
-    var resultArray = data.result;
+    var resultArray = data.result.map(row=>row.concat(0));
     //console.log(resultArray);
     return resultArray;
     })
@@ -118,8 +118,18 @@ function displayWords(words = localStorage.getItem('words')) {
       console.log(outputDiv);
       var content = "<h2>抽到的單字：</h2><p>點擊單字切換成音標 再點一次切換回單字</p><table>";
       for (var i = 0; i < words.length; i++) {
-          content += "<tr><td class=\"ranking\"><p>"+(i+1)+".</p></td>";
-          content += "<td><p class=\"pronouncing-switch\" data-value=\""+words[i][2].replace(/'/g, '&apos;')+"\">" + words[i][0] + "</p></td>";
+          content += "<tr ";
+          if(words[i][words[i].length-1])//這個字使用者不會
+          {
+            content += " style=\"color:rgb(255, 0, 255);\" ";
+          }
+          content += "><td class=\"ranking\"><p>"+(i+1)+".</p></td>";
+          content += "<td ";
+          if(words[i][words[i].length-1])//這個字使用者不會
+          {
+            content += " style=\"color:\'#00FF00\';\" ";
+          }
+          content += "><p class=\"pronouncing-switch\" data-value=\""+words[i][2].replace(/'/g, '&apos;')+"\">" + words[i][0] + "</p></td>";
           content += "<td><input type=\"button\" onclick=\"high_light(this) \" value=\"我不會\"></td>";
           content += "<td><input type=\"button\" onclick=\"showChinese(this,\'"+ words[i][1] + "\' ) \" value=\"顯示中文\"></td></tr>";
       }
@@ -159,8 +169,13 @@ function high_light(button) {
       cells[i].style.color = '#FF00FF';
     }
   }
-
-
+  line = Number(cells[0].children[0].textContent);
+  //處理loocalstorage
+  var temp=JSON.parse(localStorage.getItem('words'))
+  console.log("temp:"+temp)
+  temp[line-1][temp[line-1].length-1]=temp[line-1][temp[line-1].length-1] ? 0 : 1;
+  localStorage.setItem('words',JSON.stringify(temp));
+  console.log(localStorage.getItem('words'));
 }
 
 // Usage:
