@@ -30,7 +30,7 @@ function pickWords(method='pickAndOutputWords') {//用抽的
     var sheet = document.getElementById("sheetName").value;
   // 取得 class 為 shuffle 的 checkbox 元素
     var shuffle = document.querySelector(".shuffle").checked;
-    console.log(shuffle);
+    //console.log(shuffle);
    //console.log(choice);
     //console.log(numToPick);
     if (startLetter !== '' && endLetter !== '' && numToPick >0) {
@@ -78,13 +78,15 @@ function pickAndOutputWords(startLetter, endLetter, numToPick, sheet,shuffle,met
   })
     .then(response => response.json())
     .then(data => {
-      var resultArray = data.result.map(row=>row.concat(0));
-      // console.log(resultArray);
+      var resultArray = data.result.map(row=>row.concat([0,0]));
+      //eng/ch/英標/有沒有點開/會不會
+      //console.log(resultArray);
       return resultArray;
     })
     .catch(error => {
-      console.error('Error:', error);
-    });
+        console.error('Error:', error);
+        outputDiv.innerHTML = " ERROR: " + error + "<br>請聯繫作者";
+  });
 }
 
 
@@ -95,19 +97,22 @@ function pickall(startLetter, endLetter,sheet) {
     })
     .then(response => response.json())
     .then(data => {
-    var resultArray = data.result.map(row=>row.concat(0));
-    //console.log(resultArray);
+    var resultArray = data.result.map(row=>row.concat([0,0]));
+    //eng/ch/英標/有沒有點開/會不會
+    
     return resultArray;
     })
     .catch(error => {
-    console.error('Error:', error);
+      console.error('Error:', error);
+      outputDiv.innerHTML = " ERROR: " + error + "<br>請聯繫作者";
     });
 }
 
 function displayWords(words = localStorage.getItem('words')) {
-    console.log(localStorage.getItem('words'));
-    // console.log("test");
-    console.log(typeof(words));
+    //console.log(localStorage.getItem('words'));
+    //console.log(words);
+    // //console.log("test");
+    //console.log(typeof(words));
     if(words)
     {
       if(typeof(words) === 'string')//有暫存
@@ -115,7 +120,7 @@ function displayWords(words = localStorage.getItem('words')) {
         words=JSON.parse(words);
       }
       var outputDiv = document.getElementById("outputDiv");
-      console.log(outputDiv);
+      // console.log(outputDiv);
       var content = "<h2>抽到的單字：</h2><p>點擊單字切換成音標 再點一次切換回單字</p><table>";
       for (var i = 0; i < words.length; i++) {
           content += "<tr ";
@@ -133,11 +138,23 @@ function displayWords(words = localStorage.getItem('words')) {
           content += "<td><input type=\"button\" onclick=\"high_light(this) \" value=\"我不會\"></td>";
           content += "<td><input type=\"button\" onclick=\"showChinese(this,\'"+ words[i][1] + "\' ) \" value=\"顯示中文\"></td></tr>";
       }
+      
       content += "</table>";
       content += "<input type=\"button\" id=\"copyBtn\" value=\"複製單字到剪貼簿\">";
       content += "<input type=\"button\" onclick=\"toggleRowVisibility(this)\" value=\"只出現不會的字\"></input>";
       outputDiv.innerHTML = content;
       switch_col_one();
+      var trElements = outputDiv.getElementsByTagName("tr");
+      //console.log(trElements.length);
+      for(var i=0;i<trElements.length;i++)
+      {
+        //console.log("words[",i,"]=",words[i][words[i].length-2]);
+        //console.log("fuck^^")
+        if(words[i][words[i].length-2])
+        {
+          trElements[i].children[3].children[0].click();
+        }
+      }
       document.getElementById('copyBtn').addEventListener('click', function() {
           // 在這裡使用 this
           create_alphabat_content();
@@ -169,18 +186,25 @@ function high_light(button) {
       cells[i].style.color = '#FF00FF';
     }
   }
-  line = Number(cells[0].children[0].textContent);
+  // line = Number(cells[0].children[0].textContent);
+  var line = Number(button.parentNode.parentNode.firstChild.firstChild.textContent) ;
   //處理loocalstorage
   var temp=JSON.parse(localStorage.getItem('words'))
-  console.log("temp:"+temp)
+  //console.log("temp:"+temp)
   temp[line-1][temp[line-1].length-1]=temp[line-1][temp[line-1].length-1] ? 0 : 1;
   localStorage.setItem('words',JSON.stringify(temp));
-  console.log(localStorage.getItem('words'));
+  //console.log(localStorage.getItem('words'));
 }
 
 // Usage:
 // <button onclick="high_light(this)">Highlight Row</button>
 function showChinese(button,ch) {
+    var row = button.parentNode.parentNode;
+    var cells = row.getElementsByTagName('td');
+    // line = Number(cells[0].children[0].textContent);
+    var line = Number(button.parentNode.parentNode.firstChild.firstChild.textContent) ;
+    //處理loocalstorage
+    var temp=JSON.parse(localStorage.getItem('words'))
     if(ch[0]=='〔')
     {
         if(button.value=="顯示音標")
@@ -203,6 +227,9 @@ function showChinese(button,ch) {
           button.value ="顯示中文";
       }
     }
+    temp[line-1][temp[line-1].length-2]=temp[line-1][temp[line-1].length-2] ? 0 : 1;
+    localStorage.setItem('words',JSON.stringify(temp));
+    //console.log(localStorage.getItem('words'));
   }
   
 document.addEventListener("DOMContentLoaded", function () {
