@@ -64,7 +64,7 @@ hr
     border: 3px solid;
     border-radius: 10px;
     margin: 0;
-    align: center;
+    align-self: center;
     
 }
 
