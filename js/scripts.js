@@ -462,8 +462,12 @@ function export_localStorage()
   // 建立下載連結
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
+  var currentdate = new Date(); 
+  var datetime = "myVoc_" + currentdate.getFullYear() + 
+                + (currentdate.getMonth()+1) + 
+                + (currentdate.getMonth()+1);
   a.href= url;
-  a.download = `mywords.mvoc`;
+  a.download = `${datetime}.mvoc`;
   document.body.appendChild(a);
   a.click();
 
