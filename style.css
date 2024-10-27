@@ -1,7 +1,7 @@
 /* 基本樣式 */
 body 
 {
-    background-color: #000; 黑色背景
+    background-color: #000; /* 黑色背景 */
     color: #00FF00; /* 深綠色文字 */
     font-family: Arial, sans-serif; /* 使用Arial字體，sans-serif作為備用字體 */
     margin: 0;
