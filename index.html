@@ -16,7 +16,10 @@
     <div class="banner">
       <h1>單字檢測系統 V2.2</h1>
       <span style="font-size: 25%; color: white;">注意!如果出現錯誤 可以嘗試重接網路 刷新網站 或者清除緩存</span>
+      <br>
       <input type="button" value="清除緩存" onclick="localStorage.clear()"></input>
+      <input type="button" value="匯出緩存" onclick="export_localStorage()"></input>
+      <input type="button" value="匯入緩存" onclick="import_localStorage()"></input>
     </div>
     <div class="container">
       <div class="empty-div"></div>

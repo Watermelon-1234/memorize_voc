@@ -362,7 +362,7 @@ function col_one_unite(){
   // 取得所有具有 pronouncing-switch 類別的元素
   const pronouncingElements = document.querySelectorAll('.pronouncing-switch');
   // 取得 body 元素的字體
-  const bodyFont = window.getComputedStyle(document.body).getPropertyValue("font-family");
+  // const bodyFont = window.getComputedStyle(document.body).getPropertyValue("font-family");
 
   // 為每個元素添加點擊事件監聽器
   pronouncingElements.forEach(element => {
@@ -410,29 +410,35 @@ function copyToClipboard(content) {
 
 
 function create_alphabat_content()
-  {
+{
+  // 防止使用者複製到音標
   col_one_unite();
-    // 獲取指定的div元素
+  // 獲取指定的div元素
   const targetDiv = document.getElementById('outputDiv'); // 請將'yourDivId'替換為實際的div元素ID
   
   // 獲取該div中的所有表格
   const tables = targetDiv.getElementsByTagName('table');
 
-  // 如果有多個表格，選擇你想要處理的表格（例如，這裡選擇第一個表格）
+  // 選擇第一個表格，因為也沒有別的
   const targetTable = tables[0];
 
   // 獲取該表格中所有行
   const rows = targetTable.getElementsByTagName('tr');
+  // console.log(rows);
 
   // 創建一個空字符串，用於保存結果
   let resultString = '';
 
   // 迭代處理每一行，將第一列的textContent添加到結果字符串中
   for (let i = 0; i < rows.length; i++) {
+    if(rows[i].style.display!="none") 
+    {
       const cells = rows[i].getElementsByTagName('td'); // 如果是th而不是td，請適當更改
-      if (cells.length > 0) {
-          resultString += cells[1].textContent.trim() + '\n'; // 添加到結果字符串中，可以根據需要添加分隔符號
+      if (cells.length > 0) 
+      {
+        resultString += cells[1].textContent.trim() + '\n'; // 添加到結果字符串中，可以根據需要添加分隔符號
       }
+    }
   }
   //this.innerHTML = "已複製完成!";
   //console.log(this)
