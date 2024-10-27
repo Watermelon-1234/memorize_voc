@@ -1,6 +1,7 @@
 /* 基本樣式 */
-body {
-    background-color: #000; /* 黑色背景 */
+body 
+{
+    background-color: #000; 黑色背景
     color: #00FF00; /* 深綠色文字 */
     font-family: Arial, sans-serif; /* 使用Arial字體，sans-serif作為備用字體 */
     margin: 0;
@@ -25,12 +26,13 @@ body {
         font-size: 30px;
     }
 
-    select, input[type="number"], input[type="button"] {
+    select, input[type="number"], input[type="button"], .uploadStyle
+    {
         padding: 15px;
         height: 50px;
         font-size: 35px; /* 设置字体大小 */
         margin: 10px; /* 设置外边距 */
-        font-weight: bold; /* 设置文本粗细 */
+        font-weight: lighter; /* 设置文本粗细 */
         text-align: center;
     }
 }
@@ -38,7 +40,7 @@ body {
 /* 其他樣式 */
 h1 {
     color: #00FF00; /* 標題文字為深綠色 */
-    text-align: center; /* 文字置中 */
+    /* text-align: center; 文字置中 */
     font-weight: bold;
 }
 /* 新增橫幅的樣式 */
@@ -51,8 +53,18 @@ h1 {
 }
 h3{
     color: #000000; /* 標題文字為深綠色 */
-    text-align: center; /* 文字置中 */
+    /* text-align: center; 文字置中 */
     font-weight: bold;
+}
+
+hr
+{
+    width: 100%;
+    border: 3px solid;
+    border-radius: 10px;
+    margin: 0;
+    align: center;
+    
 }
 
 /* instruction */
@@ -60,12 +72,19 @@ h3{
     background-color: #696969; /* 頁尾背景色 */
     color: #000000; /* 頁尾文字顏色 */
     padding: 10px; /* 頁尾內邊距 */
-    text-align: center; /* 文字居中 */
+    text-align: left; /* 文字居中 */
     font-size: 14;
     width: 100%;
-    flex-direction: row;
-    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: space-between;
+    margin: 0;
+}
+.update-time
+{
+    color:#fff;
+    text-align: left;
 }
 /* 新增頁尾的樣式 */
 .footer {
@@ -85,7 +104,7 @@ label {
     font-weight: bold;
 }
 
-select, input[type="number"], input[type="button"] {
+select, input[type="number"], input[type="button"], .uploadStyle {
     background-color: #000; /* 背景色為黑色 */
     color: #00FF00; /* 文字顏色為深綠色 */
     border: 2px solid #00FF00; /* 邊框為深綠色實線 */
@@ -154,7 +173,13 @@ li {
     text-align: right; /* 將文字靠右對齊 */
 }
 
-
+.section
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
 
 @font-face {
     font-family:"PHONETIC";
@@ -167,4 +192,9 @@ li {
 span{
     font-size: 25%;
     color:white;
+}
+
+input[type="file"]
+{
+    display: none;
 }

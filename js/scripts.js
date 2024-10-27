@@ -167,6 +167,7 @@ function displayWords(words = localStorage.getItem('words')) {
     {
       console.log("no temp!");
     }
+  document.getElementById('mywords_upload').addEventListener("change",import_localStorage(event));
 }
 function high_light(button) {
 
@@ -380,7 +381,8 @@ function col_one_unite(){
 }
 
 
-function copyToClipboard(content) {
+function copyToClipboard(content) 
+{
     // 建立一個 textarea 元素
   const textarea = document.createElement('textarea');
   
@@ -445,4 +447,60 @@ function create_alphabat_content()
   // 現在resultString包含所有第一列的textContent
   copyToClipboard(resultString);
 
+}
+
+function export_localStorage()
+{
+  const lS = localStorage.getItem('words');
+  if(lS === null)
+  {
+    alert("並無緩存!");
+    return;
+  }
+  const blob = new Blob([lS], {type:"text/plain"});
+
+  // 建立下載連結
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href= url;
+  a.download = `mywords.mvoc`;
+  document.body.appendChild(a);
+  a.click();
+
+  // clear DOM
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+}
+
+
+function import_localStorage(file)
+{
+  // console.log(event);
+  // const file = event.target.files[0];
+  // file = element.files
+  console.log(file);
+  if (!file) {
+    return;
+  }
+  
+  // 使用 FileReader 來讀取檔案內容
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const content = e.target.result;
+    console.log(content);
+    // 將檔案內容存入 localStorage
+    const key = "words"; // 這裡可以自定義儲存的 key 名稱
+    localStorage.setItem(key, content);
+    
+    alert(`檔案內容已成功匯入`);
+  };
+
+  reader.onerror = function() {
+      alert("讀取檔案時發生錯誤");
+  };
+
+  reader.readAsText(file); // 讀取檔案內容為文字
+  location.reload();
+  // localStorage.setItem('words',JSON.stringify(words))
 }

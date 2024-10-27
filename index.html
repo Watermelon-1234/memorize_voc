@@ -4,6 +4,11 @@
     <base target="_top">
     <link href="style.css" rel="stylesheet">
     <script src="js/scripts.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous">
+    </script>
     <!-- <script type="module" src="file:///D:/GitHub/memorize_voc/js/database.js" crossorigin="anonymous"></script> -->
     <script type="module" src="js/database.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,14 +19,15 @@
   </head>
   <body onload="displayWords()">
     <div class="banner">
-      <h1>單字檢測系統 V2.2</h1>
+      <h1>單字檢測系統 V2.3</h1>
       <span style="font-size: 25%; color: white;">注意!如果出現錯誤 可以嘗試重接網路 刷新網站 或者清除緩存</span>
       <br>
       <input type="button" value="清除緩存" onclick="localStorage.clear()"></input>
       <input type="button" value="匯出緩存" onclick="export_localStorage()"></input>
-      <input type="button" value="匯入緩存" onclick="import_localStorage()"></input>
+      <input id="mywords_upload" type="file" accept=".mvoc" onchange="import_localStorage(this.files[0])"></input>
+      <input type="button" for="mywords_upload" class="uploadStyle" value="匯入緩存" onclick="return $(mywords_upload).click()"></input>
     </div>
-    <div class="container">
+    <div class="section">
       <div class="empty-div"></div>
       <form>
         <label for="startLetter">單字檢測：從</label>
@@ -77,25 +83,41 @@
       </form>
       <div class="empty-div"> </div>
     </div>
-    <div class="container" style="justify-content: flex-start;">
+    <center><hr></center>
+    <div class="section">
+      
+      <!-- <div class="container" style="justify-content: flex-start;"> -->
       <div class="empty-div"> </div>
       <div id="outputDiv"></div>
       <div class="empty-div"> </div>
+      <!-- </div> -->
     </div>
-    <div class="instructions">
-      <div class="empty-div"> </div>
-      <div class="instructions"></div>
-        <h2>網頁介紹</h2>
-        <br>
-        <h3>這是一個為了讓人更方便背單字而誕生的網頁，</h3><br><h3>提供了不同的版本與不同的單字抽選模式供使用者使用</h3>
-        <p>-----------------------</p>
-        <h2>網頁使用教學</h2>
-        <h3>我不想打= =</h3>
+    <div style="background-color: #696969;">
+      <div class="section">
+        <div class="empty-div"> </div>
+        <div class="instructions">
+          <div>
+            <h2>網頁介紹</h2>
+            <br>
+            <h3>這是一個為了讓人更方便背單字而誕生的網頁，</h3><br><h3>提供了不同的版本與不同的單字抽選模式供使用者使用</h3>
+            <hr>
+            <h2>網頁使用教學</h2>
+            <h3>照著上面的用應該沒有很難吧(沒空打)</h3>
+            <hr>
+            <h2>更新日誌</h2>
+            <h2 class="update-time">2024/10/27</h2>
+            <h3>1. 修正複製時會複製所有單字而不是畫面顯示上的單字</h3>
+            <h3>2. 加入匯出單字功能 點擊匯出可以把當前所有單字與其狀態匯出成.mcov檔案</h3>
+            <h3>3. 加入匯入單字功能 點選匯入即可將先前匯出的.mcov檔 並且顯示在畫面上</h3>
+            <h3>4. 修改網頁配置 使其較容易閱讀(審美待加強)</h3>
+          </div>
+        </div>
+        <div class="empty-div"></div>
       </div>
-      <div class="empty-div"></div>
+      
     </div>
     <div class="footer">
-      <p>&copy; 2023 單字檢測系統</p>
+      <p>&copy; 2024 單字檢測系統</p>
     </div>
 
   </body>
